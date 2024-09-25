@@ -1,9 +1,9 @@
 import { SafeAreaView, Text } from "react-native";
 
-export function HomeScreen() {
+export const Comunidade = () => {
     return (
         <SafeAreaView>
-            <Text>Temos uma Home!</Text>
+            <Text>Comunidade</Text>
         </SafeAreaView>
     )
 }

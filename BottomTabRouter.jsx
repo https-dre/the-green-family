@@ -34,7 +34,10 @@ export function BottomTabRouter() {
 
 const styles = StyleSheet.create({
     barStyle: {
-        backgroundColor: "#408A26"
+        backgroundColor: "#408A26",
+        borderTopEndRadius: 10,
+        borderTopWidth: 10,
+        borderBlockColor: "#D3C438"
     },
     labelStyle: {
         color: "white"

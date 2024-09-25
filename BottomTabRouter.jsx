@@ -4,7 +4,7 @@ import { HomeScreen } from "./screens/HomeScreen"
 
 const Tab = createBottomTabNavigator();
 
-export function BottomTabsRouter() {
+export function BottomTabRouter() {
     return (
         <Tab.Navigator screenOptions={{headerShown: false}}>
             <Tab.Screen name="Home" 

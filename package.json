@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-vector-icons/fontawesome": "^4.7.0-alpha.25",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/material-bottom-tabs": "^6.2.29",
     "@react-navigation/native": "^6.1.18",

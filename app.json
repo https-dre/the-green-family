@@ -11,13 +11,15 @@
       "backgroundColor": "#266B0E"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "ios.the.green.family"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dre_dias00.thegreenfamily"
     },
     "web": {
       "favicon": "./assets/favicon.png"

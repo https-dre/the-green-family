@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     },
     imageStyle: {
         width: "100%",
+        maxHeight: 200,
         borderTopEndRadius: 7,
         borderTopStartRadius: 7
     }

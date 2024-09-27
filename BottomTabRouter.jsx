@@ -1,9 +1,11 @@
 import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeScreen } from "./screens/HomeScreen";
-import { Comunidade } from "./screens/Comunidade"; // Certifique-se de importar sua tela Comunidade
 import { StyleSheet } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { HomeScreen } from "./screens/HomeScreen";
+import { Comunidade } from "./screens/Comunidade"; 
+import { Informacoes } from "./screens/Informacoes"
 
 const Tab = createBottomTabNavigator();
 
@@ -71,7 +73,7 @@ export function BottomTabRouter() {
 
             <Tab.Screen
                 name="Informações"
-                component={HomeScreen}
+                component={Informacoes}
             />
 
         </Tab.Navigator>

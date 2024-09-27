@@ -3,8 +3,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { HomeIsland } from "../components/HomeIsland"
 import { BebeInfo } from "../components/BebeInfo"
+import { ContainerObjetivos } from "../components/ContainerObjetivos";
 
 export function HomeScreen() {
+    
     return (
         <SafeAreaView style={styles.container}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -18,12 +20,14 @@ export function HomeScreen() {
                         <BebeInfo nomeBebe="Gabriel" idade="1 ano, 5 meses" />
                     </HomeIsland>
 
+                    <ContainerObjetivos />
+
                 </ScrollView>
             </TouchableWithoutFeedback>
-
         </SafeAreaView>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

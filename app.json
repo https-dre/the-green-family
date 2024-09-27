@@ -21,6 +21,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d69ed53b-720d-4c4e-bec9-6929b0913c59"
+      }
+    },
+    "owner": "dre_dias00"
   }
 }

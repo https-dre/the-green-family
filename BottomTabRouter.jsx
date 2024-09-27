@@ -82,8 +82,9 @@ const styles = StyleSheet.create({
     barStyle: {
         backgroundColor: "#408A26",
         borderTopEndRadius: 10,
-        borderTopWidth: 10,
+        borderTopWidth: 20,
         borderBlockColor: "#D3C438",
+        height: 70 
     },
     labelStyle: {
         color: "white"

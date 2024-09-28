@@ -35,7 +35,7 @@ export const ContainerObjetivos = () => {
 
             <View style={{ flexDirection: "row", gap: 15, marginVertical: 15 }}>
                 <View style={styles.blueBox}>
-                    <Text style={{ fontSize: 23, fontWeight: 700, color: "#66798F" }}>6/10</Text>
+                    <Text style={{ fontSize: 23, fontWeight: 'bold', color: "#66798F" }}>6/10</Text>
                     <Text style={{ fontSize: 15, color: "#8A8A8A" }}>Objetivos Concluídos</Text>
 
                     <TouchableOpacity style={[styles.button]}>
@@ -46,7 +46,7 @@ export const ContainerObjetivos = () => {
 
                 <View style={[styles.blueBox, { width: "60%", flexDirection: "row", alignItems: "center" }]}>
                     <View style={{ width: "80%" }}>
-                        <Text style={{ fontSize: 26, fontWeight: 700, color: "#66798F" }}>Novidades</Text>
+                        <Text style={{ fontSize: 26, fontWeight: 'bold', color: "#66798F" }}>Novidades</Text>
                         <Text style={{ fontSize: 10 }}>
                             Recomendações de produtos, vídeos, palestras e novas atividades.
                         </Text>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     },
     textGrayBold: {
         color: "#8A8A8A",
-        fontWeight: 700,
+        fontWeight: "bold",
         fontSize: 18
     },
     blueBox: {

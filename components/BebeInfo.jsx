@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 35,
-        fontWeight: 600
+        fontWeight: 'bold'
     },
     imageStyle: {
         width: "100%",

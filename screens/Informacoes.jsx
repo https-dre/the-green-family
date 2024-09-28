@@ -34,7 +34,7 @@ export const Informacoes = () => {
                     <View style={{justifyContent: "flex-end", flexDirection: "row"}}>
                         <Icon name="user-circle-o" size={30} />
                     </View>
-                    <Text style={{fontWeight: 700, fontSize: 30, color: "#2F2F2F"}}>Informações</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 30, color: "#2F2F2F"}}>Informações</Text>
 
                     <View style={{marginTop: 10}}>
                         {listaArtigos}

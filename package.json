@@ -16,13 +16,18 @@
     "@react-navigation/native-stack": "^6.11.0",
     "expo": "~51.0.28",
     "expo-status-bar": "~1.12.1",
+    "maps": "^0.3.3",
     "react": "18.2.0",
-    "react-native": "0.74.5",
+    "react-native": "^0.74.5",
+    "react-native-config": "^1.5.3",
+    "react-native-dotenv": "^3.4.11",
+    "react-native-maps": "1.14.0",
     "react-native-paper": "^5.12.5",
     "react-native-vector-icons": "^10.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "metro-react-native-babel-preset": "^0.77.0"
   },
   "private": true
 }

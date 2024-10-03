@@ -4,14 +4,17 @@ import { Text, Image, TextInput, TouchableOpacity, StyleSheet, View, SafeAreaVie
 import { MessageBox } from '../components/MessageBox';
 
 export function Cadastro() {
+    const [visible, setVisible] = useState(false)
+
     return (
         <SafeAreaView style={styles.body}>
             <MessageBox 
             icon={"check-circle"}
             iconColor='#D3C438'
             text={"Cadastro realizado com sucesso!"}
-            extVisible={true}
+            extVisible={visible}
             style={{backgroundColor: "#8da58c"}}
+            onClose={() => setVisible(false)}
             />
             <Image
                 source={require('../assets/family.png')}
@@ -40,7 +43,12 @@ export function Cadastro() {
                     <TextInput style={styles.input}></TextInput>
                 </View>
                 <View style={styles.navButtonsView}>
-                    <TouchableOpacity style={styles.entrar}>
+                    <TouchableOpacity 
+                    style={styles.entrar}
+                    onPress={()=>{
+                        setVisible(true)
+                    }}
+                    >
                         <Text style={{color: "white", fontSize: 15, fontWeight: "bold"}}>Criar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>

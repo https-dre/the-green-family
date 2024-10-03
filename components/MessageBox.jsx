@@ -12,10 +12,11 @@ export const MessageBox = ({
     titleColor = "black",
     extVisible = false,
     title = "",
-    style
+    style,
+    onClose
 }) => {
     const [visible, setVisible] = useState(extVisible)
-    const [hook, setHook] = useState(true)
+    // const [hook, setHook] = useState(true)
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -28,6 +29,17 @@ export const MessageBox = ({
         }).start();
     };
 
+    const fadeOut = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: true,
+        }).start(() => {
+            setVisible(false)
+            if (onClose) onClose() // A função onClose é necessária
+        }); // Oculta após a animação de fade-out
+    };
+
     const [height, setHeight] = useState(0)
 
     const handleLayout = (event) => {
@@ -36,29 +48,23 @@ export const MessageBox = ({
         setHeight(height);
     }
 
-    useEffect(()=>{
-        setVisible(extVisible)
-        if (visible === true) {
-            fadeIn()
+    useEffect(() => {
+        if (extVisible) {
+            setVisible(true); // Torna o componente visível
+            fadeIn(); // Executa fade-in
+        } else {
+            fadeOut(); // Executa fade-out e oculta
         }
-    }, [extVisible])
+    }, [extVisible]);
 
-    
-    useEffect(()=>{
-        if (!withButton) {
-            if (hook) {
-                setTimeout(()=>{
-                    setVisible(false)
-                }, (time*1000))
-                setHook(false)
-                return
-            }
-            setHook(true)
+    useEffect(() => {
+        if (!withButton && visible) {
+            setTimeout(() => setVisible(false), time * 1000);
         }
-    }, [visible])
+    }, [visible, withButton]);
 
     return (
-        <Animated.View style={[{display: visible ? "flex":"none", marginTop: (height/2)*(-1), opacity: fadeAnim}, styles.mainView, style]}>
+        <Animated.View style={[{marginTop: (height/2)*(-1), opacity: fadeAnim}, styles.mainView, style]}>
             <View style={[styles.headerView]}>
                 <Icon size={20} name={icon} color={iconColor}/>
                 <Text style={{marginLeft: 2, fontColor: {titleColor}}}>{title}</Text>
@@ -70,6 +76,7 @@ export const MessageBox = ({
                 style={[{display: withButton ? "flex":"none"}, styles.footerView]}
                 onPress={()=>{
                     setVisible(false)
+                    fadeOut()
                 }}
             >
                 <Text style={{fontWeight: "900", fontSize: 15}}>Continuar</Text>

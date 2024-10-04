@@ -15,9 +15,11 @@ export const Comunidade = ({navigation}) => {
     const [yourGroups, setYourGroups] = useState(null)
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View  style={styles.navBar}>
                 <View style={styles.navMenu}>
+
+                    {/* Explore */}
                     <TouchableOpacity 
                         style={styles.navButton}
                         onPress={()=> {
@@ -29,6 +31,8 @@ export const Comunidade = ({navigation}) => {
                         <Icon name="compass" size={20} style={{marginRight: 5}}/>
                         <Text>Explore</Text>
                     </TouchableOpacity>
+
+                    {/* Seus Grupos */}
                     <TouchableOpacity 
                         style={styles.navButton}
                         onPress={()=> {
@@ -70,16 +74,19 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        width: "50%"
+        width: "50%",
+        backgroundColor: 'transparent'
     },
     navBar: {
         paddingTop: 10,
         marginHorizontal: 15,
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundColor: "white"
     },
     navMenu: {
         justifyContent: "center",
         flexDirection: "row",
+        backgroundColor: "transparent"
     },
     bottomBar: {
         backgroundColor: "#D9D9D9",

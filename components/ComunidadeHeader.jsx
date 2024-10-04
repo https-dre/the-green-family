@@ -5,14 +5,16 @@ export const ComunidadeHeader = () => {
     return (
         <View style={styles.mainView}>
             <Text style={styles.title}>Grupos</Text>
-            <Icon name="search" size={25} style={styles.search}/>
+            <View style={styles.search}>
+                <Icon name="search" size={25} />
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     title: {
-        fontSize: 30,
+        fontSize: 35,
         fontWeight: "700"
     },
     mainView: {
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingHorizontal: 15,
         backgroundColor: "white",
-        paddingTop: 30
+        paddingVertical: 35
     },
     search: {
         paddingHorizontal: 15,

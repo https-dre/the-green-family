@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { HomeScreen } from "./screens/HomeScreen";
-import { Comunidade } from "./screens/Comunidade"; 
+import { ComunidadeControle } from './screens/ComunidadeControle';
 import { Informacoes } from "./screens/Informacoes"
 
 const Tab = createBottomTabNavigator();
@@ -58,7 +58,7 @@ export function BottomTabRouter() {
 
             <Tab.Screen
                 name="Comunidade"
-                component={Comunidade} // Certifique-se de que o componente está correto
+                component={ComunidadeControle} // Certifique-se de que o componente está correto
             />
 
             <Tab.Screen

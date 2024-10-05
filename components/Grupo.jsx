@@ -3,9 +3,9 @@ import Icon from "react-native-vector-icons/FontAwesome"
 
 const lorem = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid, rerum?"
 
-export const Grupo = ({ navigation, groupName = "DefaultGroupName", desc = lorem, isFavorited = false, count = 200 }) => {
+export const Grupo = ({ navigation, groupName = "DefaultGroupName", desc = lorem, isFavorited = false, count = 200, onPress }) => {
     return (
-        <TouchableOpacity style={styles.grupo}>
+        <TouchableOpacity style={styles.grupo} onPress={()=>{onPress()}}>
             <View style={{ backgroundColor: "white" }}>
                 <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
                     <Image source={require("../assets/examples/3d_avatar_12.jpg")} />

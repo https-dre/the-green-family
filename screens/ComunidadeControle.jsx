@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { Comunidade } from "./Comunidade";
 import { Login } from "./Login";
+import { Group } from "./Comunidade/Group";
 
 import { ComunidadeHeader } from "../components/ComunidadeHeader";
 
@@ -20,7 +21,10 @@ export const ComunidadeControle = () => {
                         header: () => <ComunidadeHeader/>
                     }}
                 />
-                <Stack.Screen name="Login" component={Login}/>
+                <Stack.Screen 
+                    name="Grupo" 
+                    component={Group}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )

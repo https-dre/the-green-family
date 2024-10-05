@@ -11,7 +11,7 @@ const groups = [
     }
 ]
 
-const handleGroups = (array) => {
+const handleGroups = (array, navigation) => {
     let components = []
     array.forEach((e, index) => {
         components.push(
@@ -20,7 +20,8 @@ const handleGroups = (array) => {
                 groupName={e.name} 
                 desc={e.desc} 
                 isFavorited={e.isFavorited} 
-                count={e.count} 
+                count={e.count}
+                onPress={()=>{navigation.navigate('Grupo')}}
             />
         )
     })
@@ -28,8 +29,8 @@ const handleGroups = (array) => {
     return components
 }
 
-export const Explore = () => {
-    const groupList = handleGroups(groups)
+export const Explore = ({navigation}) => {
+    const groupList = handleGroups(groups, navigation)
     return (
         <ScrollView style={{ backgroundColor: "white", flex: 1 }}>
             <View style={styles.explorePopulares}>

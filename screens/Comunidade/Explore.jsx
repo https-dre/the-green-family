@@ -3,17 +3,15 @@ import Icon from "react-native-vector-icons/FontAwesome6"
 
 import { Grupo } from "../../components/Grupo";
 
-const groups = [
-    {
-        name: "Itens Escolares",
-        desc: "Comunidade para doações de livros e uniformes escolares da escola.",
-        count: "2.9k"
-    }
-]
+import data from "../../assets/data/groups.json";
+
+
+const groups = Object.entries(data.explore)
 
 const handleGroups = (array, navigation) => {
     let components = []
-    array.forEach((e, index) => {
+    array.forEach(([index, e]) => {
+        const navgString = `Explore_group_${index}`
         components.push(
             <Grupo 
                 key={index}  // Adicione a propriedade key aqui
@@ -21,7 +19,7 @@ const handleGroups = (array, navigation) => {
                 desc={e.desc} 
                 isFavorited={e.isFavorited} 
                 count={e.count}
-                onPress={()=>{navigation.navigate('Grupo')}}
+                onPress={()=>{navigation.push(navgString)}}
             />
         )
     })
@@ -42,8 +40,7 @@ export const Explore = ({navigation}) => {
                     <Icon name="angle-right" color="black" size={30} />
                 </TouchableOpacity>
             </View>
-             {/* Grupos */}
-             <View>
+             <View style={styles.groupsView}>
                 {groupList}
              </View>
 
@@ -58,5 +55,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-between", 
         paddingHorizontal: 20,
         marginVertical: 25 
+    },
+    groupsView: {
+        height: "100%"
     }
 })

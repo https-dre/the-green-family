@@ -1,24 +1,22 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { Grupo } from "../../components/Grupo";
 
-const groups = [
-    {
-        name: "Apoio para pais de primeira viagem",
-        desc: "Comunidade que apoia pais de primeira viagem e visa um futuro melhor para os filhos.",
-        count: 1.2
-    }
-]
+import data from "../../assets/data/groups.json"
 
-const handleGroups = (array) => {
+const groups = Object.entries(data.yourGroups)
+
+const handleGroups = (array, navigation) => {
     let components = []
-    array.forEach((e, index) => {
+    array.forEach(([index, e]) => {
+        const navgString = `YourGroups_group_${index}`
         components.push(
             <Grupo 
                 key={index}  // Adicione a propriedade key aqui
                 groupName={e.name} 
                 desc={e.desc} 
                 isFavorited={e.isFavorited} 
-                count={e.count} 
+                count={e.count}
+                onPress={()=>{navigation.push(navgString)}}
             />
         )
     })
@@ -26,8 +24,8 @@ const handleGroups = (array) => {
     return components
 }
 
-export const YourGroups = () => {
-    const groupList = handleGroups(groups)
+export const YourGroups = ({navigation}) => {
+    const groupList = handleGroups(groups, navigation)
     return (
         <ScrollView style={{ backgroundColor: "white", flex: 1 }}>
             <View style={styles.explorePopulares}>
@@ -35,7 +33,6 @@ export const YourGroups = () => {
                     <Text style={{ fontSize: 28, fontWeight: "bold" }}>Grupos que você entrou</Text>
                 </View>
             </View>
-             {/* Grupos */}
              <View>
                 {groupList}
              </View>

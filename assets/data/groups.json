@@ -1,0 +1,16 @@
+{
+    "explore" : {
+        "1": {
+            "name": "Itens Escolares",
+            "desc": "Comunidade para doações de livros e uniformes escolares da escola.",
+            "count": "2.9k"
+        }
+    },
+    "yourGroups" : {
+        "1": {
+            "name": "Apoio para pais de primeira viagem",
+            "desc": "Comunidade que apoia pais de primeira viagem e visa um futuro melhor para os filhos.",
+            "count": "1.2k"
+        }
+    }
+}

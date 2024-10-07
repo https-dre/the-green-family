@@ -55,6 +55,7 @@ const handleRouteGroups = (components) => {
                         <GroupsHeader
                             imagePath="../assets/examples/3d_avatar_12.jpg"
                             name={realName}
+                            count={data[type][realIndex]["count"]}
                         />
                     
                 }}

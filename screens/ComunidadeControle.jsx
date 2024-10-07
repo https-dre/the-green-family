@@ -31,10 +31,20 @@ const Stack = createStackNavigator()
 //     return routes
 // }
 
+const lowFirstLetter = (str) => {
+    return str[0].toLowerCase() + str.slice(1)
+}
+
 const handleRouteGroups = (components) => {
     const groups = []
     let i = 1
     Object.entries(groupsComponents).forEach(([index, component])=>{
+        const realId = index.split("_")
+        const type = lowFirstLetter(realId[0])
+        const realIndex = realId[2]
+        // console.error("Erro teste: " + type)
+        // return
+        let realName = data[type][realIndex]["name"]
         groups.push(
             <Stack.Screen
                 key={index}
@@ -44,7 +54,7 @@ const handleRouteGroups = (components) => {
                     header: () => 
                         <GroupsHeader
                             imagePath="../assets/examples/3d_avatar_12.jpg"
-                            name={index}
+                            name={realName}
                         />
                     
                 }}

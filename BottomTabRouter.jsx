@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { HomeScreen } from "./screens/HomeScreen";
 import { ComunidadeControle } from './screens/ComunidadeControle';
 import { Informacoes } from "./screens/Informacoes"
+import { CalendarScreen } from './screens/CalendarScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -68,7 +69,7 @@ export function BottomTabRouter() {
 
             <Tab.Screen
                 name="Calendário"
-                component={HomeScreen}
+                component={CalendarScreen}
             />
 
             <Tab.Screen

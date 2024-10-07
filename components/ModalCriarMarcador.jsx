@@ -26,7 +26,7 @@ export const ModalCriarMarcador = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         open: (dateFromCalendar) => {
-            setCurrentDateFromCalendar(new Date(dateFromCalendar.timestamp))
+            setCurrentDateFromCalendar(dateFromCalendar)
             setModalVisible(true);
         },
         close: () => {

@@ -18,9 +18,9 @@ const listaDeArtigos = [
 
 const handleArtigos = (array) => {
     let elements = []
-    for(const artigo of array) {
-        elements.push(<Artigo titulo={artigo.titulo} conteudo={artigo.conteudo} views={artigo.views} />)
-    }
+    array.forEach((artigo, index) => {
+        elements.push(<Artigo key={index} titulo={artigo.titulo} conteudo={artigo.conteudo} views={artigo.views} />)
+    })
     return elements
 }
 

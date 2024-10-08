@@ -5,6 +5,8 @@ import { CalendarCarousel } from "../components/CalendarCarousel";
 import { Marcador } from "../components/Marcador";
 import { ModalCriarMarcador } from "../components/ModalCriarMarcador";
 
+// Ops: temos que otimizar o click do calendário, o modal para criar marcador e os marcadores!
+
 export const CalendarScreen = () => {
     const modalRef = useRef();
     const [marcadores, setMarcadores] = useState([]);
@@ -41,7 +43,7 @@ export const CalendarScreen = () => {
                     </View>
                     <View>
                         <Text style={styles.title}>Marcadores</Text>
-                        <View style={{ marginLeft: 20, marginBottom: 40 }}>
+                        <View style={{ marginVertical: 20, gap: 15 }}>
                             {marcadores}
                         </View>
                         <ModalCriarMarcador ref={modalRef} handleNovaTask={adicionarTask} />

@@ -1,20 +1,30 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import Icon from "react-native-vector-icons/FontAwesome6"
+import { useState, useCallback } from 'react'
+
+// Ops: tem que otimizar isso aqui!
 
 export const Marcador = ({ title = "TaskTitle", data = new Data(), isChecked = true }) => {
-    const checked = isChecked ? <Icon name="check" size={20} color="black" /> : null
+    const [checkState, setCheckState] = useState(isChecked)
+
+    const handleCheckState = () => {
+        setCheckState(prevState => !prevState)
+    };
+
     return (
-        <View style={{flexDirection: "row", alignItems: "center", gap: "200%"}}>
+        <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 20}}>
             <View style={styles.marcador}>
                 <Icon name="bars" size={25} color="black" />
-                <View style={{ height: "100%", width: 5, backgroundColor: "#FFE179", borderRadius: 100 }}></View>
-                <TouchableOpacity style={{ gap: 5 }}>
+                <View style={{ height: "100%", width: 5, backgroundColor: "lightblue", padding: 5}}></View>
+                <TouchableOpacity style={{ gap: 5 }}
+                    onPress={handleCheckState}
+                >
                     <Text style={styles.titleText}>{title}</Text>
                     <Text style={styles.dataText}>{data.toLocaleDateString()}</Text>
                 </TouchableOpacity>
             </View>
 
-            {checked}
+            {checkState && <Icon name="check" size={20} color="black" />}
         </View>
     )
 }

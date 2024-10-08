@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         width: 50
     },
     headerView: {
-        flexDirection: "row"
+        flexDirection: "row",
+        alignItems: "center"
     },
     senderText: {
         marginRight: 5

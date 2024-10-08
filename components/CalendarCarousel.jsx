@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
@@ -18,24 +18,24 @@ export const CalendarCarousel = ({ calendarClick }) => {
     selectedDayTextColor: "green"
   };
 
-  const failedScroll = (info) => {
+  /* const failedScroll = (info) => {
     const wait = new Promise(resolve => setTimeout(resolve, 500));
     wait.then(() => {
       flatListRef.current?.scrollToIndex({ index: info.index, animated: true });
     });
-  };
+  }; */
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const windowWidth = Dimensions.get('window').width;
 
-  const generateMonths = () => {
+  const generateMonths = useMemo(() => {
     let months = [];
     for (let i = -12; i <= 12; i++) {
       const newMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + i, 1);
       months.push(newMonth);
     }
     return months;
-  };
+  }, [currentMonth]);
 
   const formatDate = (date) => {
     let year = date.getFullYear();
@@ -44,34 +44,33 @@ export const CalendarCarousel = ({ calendarClick }) => {
     return `${year}-${month}-${day}`;
   };
 
-  const handleClick = (date) => {
-    // Converte o objeto date para uma instância de Date
-    const dateInstance = new Date(date.year, date.month - 1, date.day); // O mês é zero-based
+  const handleClick = useCallback((date) => {
+    const dateInstance = new Date(date.year, date.month - 1, date.day);
     const dateString = formatDate(dateInstance);
-    
-    // Adiciona ou remove o dia marcado
+
     setMarkedDays((prevDays) => {
       if (prevDays.includes(dateString)) {
-        return prevDays.filter(day => day !== dateString); // Remove se já estiver marcado
+        return prevDays.filter(day => day !== dateString);
       } else {
-        return [...prevDays, dateString]; // Adiciona se não estiver marcado
+        return [...prevDays, dateString];
       }
     });
-    
-    calendarClick(dateInstance); // Aqui você pode passar o objeto Date para calendarClick
-  }
+
+    calendarClick(dateInstance);
+  }, [calendarClick]);
+
 
   const today = new Date();
 
-  const renderDay = ({ date, state }) => {
-    const isToday = 
-      date.day === today.getDate() && 
-      date.month === (today.getMonth() + 1) && 
+  const renderDay = React.memo(({ date, state }) => {
+    const isToday =
+      date.day === today.getDate() &&
+      date.month === (today.getMonth() + 1) &&
       date.year === today.getFullYear();
 
     const isMarked = markedDays.includes(formatDate(new Date(date.year, date.month - 1, date.day))); // Verifica se o dia está marcado
     const isOutsideMonth = state === 'disabled';
-    
+
     // Define a cor de fundo com base no estado do dia
     const backgroundColor = isToday ? 'yellow' : isMarked ? 'lightblue' : 'transparent';
     const textColor = isToday ? '#685A11' : (isOutsideMonth ? '#BCBCBC' : 'black');
@@ -92,7 +91,7 @@ export const CalendarCarousel = ({ calendarClick }) => {
         </Text>
       </TouchableOpacity>
     );
-  };
+  });
 
   const renderCalendar = ({ item }) => (
     <Calendar
@@ -115,13 +114,15 @@ export const CalendarCarousel = ({ calendarClick }) => {
     <FlatList
       horizontal
       pagingEnabled
-      data={generateMonths()}
-      keyExtractor={(item) => item.toString()}
+      data={generateMonths}
+      keyExtractor={(item) => formatDate(item)}
       renderItem={renderCalendar}
       getItemLayout={getItemLayout}
-      initialScrollIndex={12}
-      onScrollToIndexFailed={failedScroll}
+      initialNumToRender={3}
+      windowSize={5}
+      maxToRenderPerBatch={2}
     />
+
   );
 };
 

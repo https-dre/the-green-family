@@ -1,48 +1,53 @@
-import { SafeAreaView, Text, StyleSheet, View } from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
+import { useState, useRef, useCallback } from "react";
+
 import { CalendarCarousel } from "../components/CalendarCarousel";
-import { useState, useEffect, useRef } from "react";
 import { Marcador } from "../components/Marcador";
 import { ModalCriarMarcador } from "../components/ModalCriarMarcador";
 
 export const CalendarScreen = () => {
     const modalRef = useRef();
     const [marcadores, setMarcadores] = useState([]);
-    
-    const openModal = (dateFromCalendar) => {
+
+    const openModal = useCallback((dateFromCalendar) => {
         if (modalRef.current) {
             modalRef.current.open(dateFromCalendar);
         }
-    };
+    }, []);
 
-    const calendarClick = (dateFromCalendar) => {
+    const calendarClick = useCallback((dateFromCalendar) => {
         console.log(dateFromCalendar)
         openModal(dateFromCalendar)
-    };
+    }, [openModal]);
 
-    const adicionarTask = (taskData) => {
+    const adicionarTask = useCallback((taskData) => {
         console.log(taskData)
-        setMarcadores([...marcadores, <Marcador 
-            title={taskData.title} 
-            data={taskData.date} 
-            description={taskData.description} isChecked={taskData.isChecked}/>
+        setMarcadores([...marcadores, <Marcador
+            title={taskData.title}
+            data={taskData.date}
+            description={taskData.description} isChecked={taskData.isChecked} />
         ])
-    }
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
-            <View>
-                <Text style={[styles.title, { marginVertical: 20 }]}>Calendário</Text>
-                <View>
-                    <CalendarCarousel calendarClick={calendarClick}/>
-                </View>
-            </View>
-            <View>
-                <Text style={styles.title}>Marcadores</Text>
-                <View style={{ marginLeft: 20 }}>
-                    {marcadores}
-                </View>
-                <ModalCriarMarcador ref={modalRef} handleNovaTask={adicionarTask}/>
-            </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <ScrollView>
+                    <View>
+                        <Text style={[styles.title, { marginVertical: 20 }]}>Calendário</Text>
+                        <View>
+                            <CalendarCarousel calendarClick={calendarClick} />
+                        </View>
+                    </View>
+                    <View>
+                        <Text style={styles.title}>Marcadores</Text>
+                        <View style={{ marginLeft: 20, marginBottom: 40 }}>
+                            {marcadores}
+                        </View>
+                        <ModalCriarMarcador ref={modalRef} handleNovaTask={adicionarTask} />
+                    </View>
+                </ScrollView>
+            </TouchableWithoutFeedback>
         </SafeAreaView>
     );
 };

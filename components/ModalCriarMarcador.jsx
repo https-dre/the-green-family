@@ -1,76 +1,109 @@
-import React, { useImperativeHandle, useRef, forwardRef, useState } from 'react'
-import { View, Text, Button, Modal, StyleSheet, TextInput } from 'react-native';
+import React, { useImperativeHandle, forwardRef, useState, useCallback, useMemo } from 'react';
+import {
+    View, Text, Button, Modal, StyleSheet,
+    TextInput, TouchableWithoutFeedback, Keyboard
+} from 'react-native';
+
+// Ops: tentei fazer assim para deixar otimizado
 
 export const ModalCriarMarcador = forwardRef((props, ref) => {
+    // Usando um único estado para gerenciar inputs
+    const [formState, setFormState] = useState({
+        title: '',
+        description: '',
+        currentDate: new Date()
+    });
+
     const [modalVisible, setModalVisible] = useState(false);
-    const [titleInput, setTitleInput] = useState('');
-    const [descriptionInput, setDescriptionInput] = useState('');
-    const [currentDateFromCalendar, setCurrentDateFromCalendar] = useState(new Date())
 
-    const handle = () => {
+    // Função para atualizar o estado do formulário de forma eficiente
+    const handleInputChange = (field, value) => {
+        setFormState((prevState) => ({
+            ...prevState,
+            [field]: value
+        }));
+    };
 
+    const handleCreateTask = useCallback(() => {
         const newTask = {
-            title: titleInput,
-            description: descriptionInput,
-            date: currentDateFromCalendar,
+            title: formState.title,
+            description: formState.description,
+            date: formState.currentDate,
             isChecked: false
         };
 
-        props.handleNovaTask(newTask)
+        props.handleNovaTask(newTask);
 
-        setTitleInput('');
-        setDescriptionInput('');
+        // Resetar inputs e fechar o modal
+        setFormState({
+            title: '',
+            description: '',
+            currentDate: new Date()
+        });
         setModalVisible(false);
-        setCurrentDateFromCalendar(null)
-    };
+    }, [formState, props]);
 
+    // Memoizar funções de abertura e fechamento do modal para evitar recriações
     useImperativeHandle(ref, () => ({
         open: (dateFromCalendar) => {
-            setCurrentDateFromCalendar(dateFromCalendar)
+            setFormState((prevState) => ({
+                ...prevState,
+                currentDate: dateFromCalendar
+            }));
             setModalVisible(true);
         },
         close: () => {
             setModalVisible(false);
-        },
-    }));
+        }
+    }), []);
 
-    return (
-        <View>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => setModalVisible(false)}
-            >
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.title}>Agendar nova Task!</Text>
+    const handleCancel = () => {
+        setFormState({
+            title: '',
+            description: '',
+            currentDate: new Date()
+        });
+        setModalVisible(false);
+    }
+
+    // Usar useMemo para o conteúdo do modal, evitando renderizações desnecessárias
+    const modalContent = useMemo(() => (
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => setModalVisible(false)}
+        >
+            <View style={styles.modalContainer}>
+                <View style={styles.modalContent}>
+                    <Text style={styles.title}>Agendar nova Tarefa!</Text>
+                    <View style={{width: "100%"}}>
+                        <Text>Nome Da Tarefa!</Text>
                         <TextInput
-                            placeholder={"Nome da task"}
                             style={styles.input}
-                            value={titleInput}
-                            onChangeText={setTitleInput}
+                            value={formState.title}
+                            onChangeText={(text) => handleInputChange('title', text)}
                         />
+                        <Text>Descrição</Text>
                         <TextInput
-                            placeholder={"Descrição"}
                             style={styles.input}
-                            value={descriptionInput}
-                            onChangeText={setDescriptionInput}
+                            value={formState.description}
+                            onChangeText={(text) => handleInputChange('description', text)}
                         />
-                        <Button title="Criar" onPress={handle} />
+                        <Text>Data: {formState.currentDate.toLocaleDateString()}</Text>
                     </View>
+
+                    <Button title="Criar" onPress={handleCreateTask} />
+                    <Button title="Cancel" onPress={handleCancel} />
                 </View>
-            </Modal>
-        </View>
-    );
+            </View>
+        </Modal>
+    ), [formState, modalVisible, handleCreateTask]);
+
+    return <View>{modalContent}</View>;
 });
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     modalContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -103,6 +136,6 @@ const styles = StyleSheet.create({
         padding: 10,
         width: "90%",
         borderRadius: 3,
-        margin: 10
+        margin: 10,
     }
 });

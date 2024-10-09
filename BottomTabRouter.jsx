@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome6';
 
-import { HomeScreen } from "./screens/HomeScreen";
+import { HomeScreen } from "./screens/Home/HomeScreen";
 import { ComunidadeControle } from './screens/ComunidadeControle';
 import { Informacoes } from "./screens/Informacoes"
 import { CalendarScreen } from './screens/CalendarScreen';
+import { HomeControl } from './screens/Home/HomeControl';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,19 +24,19 @@ export function BottomTabRouter() {
             }
             switch (route.name) {
                 case 'Home':
-                    iconName = "home"
+                    iconName = "house"
                     break;
                 case 'Comunidade':
-                    iconName = "users"
+                    iconName = "earth-americas"
                     break;
                 case 'Informações':
-                    iconName = 'search'
+                    iconName = 'magnifying-glass'
                     break;
                 case 'Mais':
                     iconName = 'bars'
                     break;
                 case 'Calendário':
-                    iconName = 'calendar-o'
+                    iconName = 'calendar'
                     break;
             }
 
@@ -64,7 +65,7 @@ export function BottomTabRouter() {
 
             <Tab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={HomeControl}
             />
 
             <Tab.Screen

@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const ButtonWithIcon = ({icon, text, iconSize = 20, fontColor = "black", ...rest}) => {
     return (
-        <TouchableOpacity style={[styles.button, rest.style]}>
+        <TouchableOpacity {...rest} style={[styles.button, rest.style]} >
             <Text style={{color: fontColor}}>{text}</Text>
             <Icon name={icon} size={iconSize} color={fontColor}/>
         </TouchableOpacity>

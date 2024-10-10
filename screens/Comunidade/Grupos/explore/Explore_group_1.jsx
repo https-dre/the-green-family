@@ -6,12 +6,10 @@ import { DonationRequest } from "../../../../components/DonationRequest";
 import { ReceivedMessage } from "../../../../components/Messages/ReceivedMessage";
 import { SendMessage } from "../../../../components/Messages/SendMessage";
 
-const addMessage = (content, sender, time, messages, setMessages, requirePerfil = null) => {
-    // console.error(content)
-    // return
+const addMessage = (content, sender, time, setMessages, requirePerfil = null) => {
     const newMessage = (
         <SendMessage // Garante uma chave única
-            key={messages?messages.lenght:0}
+            key={Math.random()} // Usando Math.random() para gerar uma chave única
             sender={sender}
             time={time}
             content={content}
@@ -21,8 +19,56 @@ const addMessage = (content, sender, time, messages, setMessages, requirePerfil 
     );
 
     // Atualiza o estado com a nova mensagem
-    setMessages([...messages, newMessage]);
-}
+    setMessages(prevMessages => [...prevMessages, newMessage]);
+
+    const videoMessage = "Bom dia! Eu tenho algumas usadas do meu filho, só tem duas semanas de uso. Gostaria de me encontrar no parque para eu te entregar?";
+    const videoMessage2 = "Pode sim";
+
+    // Verifica o conteúdo da mensagem e adiciona mensagens recebidas com delay
+    if (content === videoMessage) {
+        setTimeout(() => {
+            setMessages(prevMessages => [
+                ...prevMessages,
+                <ReceivedMessage
+                    key={Math.random()} // Chave única para a mensagem recebida
+                    sender="Sophia"
+                    time="10:01 PM"
+                    content="Claro, pode ser hoje à tarde?"
+                    style={styles.sendMessage}
+                />
+            ]);
+        }, 500);
+    } else if (content === videoMessage2) {
+        setTimeout(() => {
+            setMessages(prevMessages => [
+                ...prevMessages,
+                <ReceivedMessage
+                    key={Math.random()} // Chave única para a mensagem recebida
+                    sender="Sophia"
+                    time="10:01 PM"
+                    content="Então, te vejo lá"
+                    style={styles.sendMessage}
+                />
+            ]);
+        }, 500);
+    }
+};
+
+const addReceivedMessage = (content, sender, time, setMessages, requirePerfil = null) => {
+    const newMessage = (
+        <ReceivedMessage
+            key={Math.random()} // Usando Math.random() para gerar uma chave única
+            sender={sender}
+            time={time}
+            content={content}
+            requirePerfil={requirePerfil}
+            style={styles.sendMessage}
+        />
+    );
+
+    // Atualiza o estado com a nova mensagem
+    setMessages(prevMessages => [...prevMessages, newMessage]);
+};
 
 export const Explore_group_1 = () => {
     const [message, setMessage] = useState("");
@@ -47,12 +93,6 @@ export const Explore_group_1 = () => {
                     content="Bom dia! Alguém poderia contribuir, por favor?"
                     style={styles.receivedMessage}
                 />
-                <SendMessage
-                    sender="Leonardo"
-                    time="10:00 AM"
-                    content="Bom dia! Eu tenho algumas usadas do meu filho, só tem duas semanas de uso. Gostaria de me encontrar no parque para eu te entregar?"
-                    style={{ marginTop: 10 }}
-                />
                 {messages}
             </ScrollView>
             <View style={styles.senderMessageView}>
@@ -65,10 +105,7 @@ export const Explore_group_1 = () => {
                 <TouchableOpacity
                     style={styles.senderIcon}
                     onPress={() => {
-                        // Chama a função addMessage corretamente
-                        // setMessages(["Algo", "Teste"])
-                        // console.error("Messages: ", messages)
-                        addMessage(message, "Leonardo", "10:00 AM", messages, setMessages);
+                        addMessage(message, "Leonardo", "10:00 AM", setMessages);
                         setMessage(""); // Limpa o campo de entrada
                     }}
                 >
@@ -77,7 +114,7 @@ export const Explore_group_1 = () => {
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     mainView: {

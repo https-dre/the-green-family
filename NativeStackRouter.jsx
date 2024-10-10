@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Loading } from "./screens/Loading";
 
 const Stack = createNativeStackNavigator();
 

@@ -8,7 +8,7 @@ import { BebeInfo } from "../components/BebeInfo"
 import { ContainerObjetivos } from "../components/ContainerObjetivos";
 import { Artigo } from "../components/Artigo";
 
-export function HomeScreen() {
+export function HomeScreen({navigation}) {
     
     return (
         <SafeAreaView style={styles.container}>
@@ -16,7 +16,7 @@ export function HomeScreen() {
                 <ScrollView style={[styles.container, { padding: 15 }]}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 15 }}>
                         <Icon name="moon-o" size={25} color="black" />
-                        <Icon name="user-circle-o" size={30} color="black" />
+                        <Icon name="user-circle-o" size={30} color="black"/>
                     </View>
 
                     <HomeIsland>

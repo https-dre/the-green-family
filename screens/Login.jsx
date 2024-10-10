@@ -1,6 +1,6 @@
 import { Text, Image, TextInput, TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
 
-export function Login() {
+export function Login({navigation}) {
     return (
         <SafeAreaView style={styles.body}>
             <Image
@@ -22,7 +22,9 @@ export function Login() {
                     <TextInput style={styles.input}></TextInput>
                 </View>
                 <View style={styles.navButtonsView}>
-                    <TouchableOpacity style={styles.entrar}>
+                    <TouchableOpacity style={styles.entrar}
+                        onPress={()=>navigation.navigate("MainRouter")}
+                    >
                         <Text style={{color: "white", fontSize: 15, fontWeight: "bold"}}>Entrar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>

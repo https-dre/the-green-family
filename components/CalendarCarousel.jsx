@@ -118,11 +118,11 @@ export const CalendarCarousel = ({ calendarClick }) => {
       keyExtractor={(item) => formatDate(item)}
       renderItem={renderCalendar}
       getItemLayout={getItemLayout}
-      initialNumToRender={3}
-      windowSize={5}
-      maxToRenderPerBatch={2}
+      initialNumToRender={2}
+      windowSize={3}
+      maxToRenderPerBatch={1}
+      removeClippedSubviews={true} // Adiciona essa opção
     />
-
   );
 };
 

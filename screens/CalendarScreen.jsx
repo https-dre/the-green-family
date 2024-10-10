@@ -1,4 +1,5 @@
-import { SafeAreaView, Text, StyleSheet, View, TouchableWithoutFeedback, Keyboard, ScrollView } from "react-native";
+import { SafeAreaView, Text, StyleSheet, View, TouchableWithoutFeedback, 
+    Keyboard, ScrollView, InteractionManager } from "react-native";
 import { useState, useRef, useCallback } from "react";
 
 import { CalendarCarousel } from "../components/CalendarCarousel";
@@ -13,22 +14,18 @@ export const CalendarScreen = () => {
 
     const openModal = useCallback((dateFromCalendar) => {
         if (modalRef.current) {
-            modalRef.current.open(dateFromCalendar);
+            InteractionManager.runAfterInteractions(() => {
+                modalRef.current.open(dateFromCalendar);
+            });
         }
-    }, []);
+    }, []);    
 
     const calendarClick = useCallback((dateFromCalendar) => {
-        console.log(dateFromCalendar)
         openModal(dateFromCalendar)
     }, [openModal]);
 
     const adicionarTask = useCallback((taskData) => {
-        console.log(taskData)
-        setMarcadores([...marcadores, <Marcador
-            title={taskData.title}
-            data={taskData.date}
-            description={taskData.description} isChecked={taskData.isChecked} />
-        ])
+        setMarcadores((prev) => [...prev, taskData]);
     }, []);
 
     return (
@@ -44,7 +41,16 @@ export const CalendarScreen = () => {
                     <View>
                         <Text style={styles.title}>Marcadores</Text>
                         <View style={{ marginVertical: 20, gap: 15 }}>
-                            {marcadores}
+                            {marcadores.map((task, index) => (
+                                <Marcador
+                                    key={index}
+                                    title={task.title}
+                                    data={task.date}
+                                    description={task.description}
+                                    isChecked={task.isChecked}
+                                />
+                            ))}
+
                         </View>
                         <ModalCriarMarcador ref={modalRef} handleNovaTask={adicionarTask} />
                     </View>
@@ -57,12 +63,14 @@ export const CalendarScreen = () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
-        flex: 1
+        flex: 1,
+        
     },
     title: {
         fontSize: 25,
         color: "#343434",
         fontWeight: "bold",
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 20
     }
 });

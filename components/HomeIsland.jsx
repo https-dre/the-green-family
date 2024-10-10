@@ -1,9 +1,8 @@
 import { View, Text, TouchableOpacity, StyleSheet, TextInput } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { ButtonWithIcon } from "./ButtonWithIcon"
 
-export const HomeIsland = ({ children, ...rest }) => {
+export const HomeIsland = ({ navigation, children, ...rest }) => {
 
     return (
         <View style={[styles.HomeIsland, rest.style]} {...rest}>
@@ -12,8 +11,8 @@ export const HomeIsland = ({ children, ...rest }) => {
             <View style={{ padding: 15 }}>
                 <TextInput style={styles.textInput} placeholder="Do que você precisa?" />
                 <View style={{ flexDirection: "row", gap: 10 }}>
-                    <ButtonWithIcon style={{ backgroundColor: "#2A6642" }} text="Doações" icon="heart-o" fontColor="#ADFFBA" />
-                    <ButtonWithIcon style={{ backgroundColor: "#E5D47C" }} text="Mapa" icon="map-marker" fontColor="#D19829" />
+                    <ButtonWithIcon style={{ backgroundColor: "#2A6642" }} text="Doações" icon="heart-o" fontColor="#ADFFBA" onPress={() => navigation.navigate("DoacoesRecebidas")}/>
+                    <ButtonWithIcon style={{ backgroundColor: "#E5D47C" }} text="Mapa" icon="map-marker" fontColor="#D19829" onPress={() => navigation.navigate("Mapa")}/>
                 </View>
             </View>
 
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
         padding: 15,
         backgroundColor: "#F7F7F7",
         color: "#8A8A8A",
-        marginBottom: 10
+        marginBottom: 10,
+        borderRadius: 5
     }
 })

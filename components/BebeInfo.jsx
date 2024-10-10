@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, View, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const BebeInfo = ({ nomeBebe, idade }) => {
@@ -11,9 +11,12 @@ export const BebeInfo = ({ nomeBebe, idade }) => {
                     <Text style={{ color: "white" }}>{idade}</Text>
                 </View>
 
-                <TouchableOpacity>
-                    <Icon name="ellipsis-v" size={25} color={"gray"} />
-                </TouchableOpacity>
+                <View>
+                    <TouchableOpacity>
+                        <Icon name="ellipsis-v" size={25} color={"gray"} />
+                    </TouchableOpacity>
+                </View>
+
             </View>
         </View>
     )
@@ -22,10 +25,13 @@ export const BebeInfo = ({ nomeBebe, idade }) => {
 const styles = StyleSheet.create({
     bebeInfo: {
         position: "absolute",
-        zIndex: 1000,
-        padding: 20,
+        top: 20,            
+        left: 20,           
+        right: 20,          
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",  
+        alignItems: "flex-start",             
+        zIndex: 1000,        
 
     },
     title: {

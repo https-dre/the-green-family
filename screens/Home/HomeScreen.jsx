@@ -1,12 +1,10 @@
 import { SafeAreaView, Text, View, StyleSheet, ScrollView, TouchableWithoutFeedback, Keyboard,TouchableOpacity } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { ButtonWithIcon } from "../components/ButtonWithIcon";
-
-import { HomeIsland } from "../components/HomeIsland"
-import { BebeInfo } from "../components/BebeInfo"
-import { ContainerObjetivos } from "../components/ContainerObjetivos";
-import { Artigo } from "../components/Artigo";
+import { HomeIsland } from "../../components/HomeIsland"
+import { BebeInfo } from "../../components/BebeInfo"
+import { ContainerObjetivos } from "../../components/ContainerObjetivos";
+import { Artigo } from "../../components/Artigo";
 
 export function HomeScreen({navigation}) {
     
@@ -16,10 +14,10 @@ export function HomeScreen({navigation}) {
                 <ScrollView style={[styles.container, { padding: 15 }]}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 15 }}>
                         <Icon name="moon-o" size={25} color="black" />
-                        <Icon name="user-circle-o" size={30} color="black"/>
+                        <Icon name="user-circle-o" size={30} color="black" />
                     </View>
 
-                    <HomeIsland>
+                    <HomeIsland navigation={navigation}>
                         <BebeInfo nomeBebe="Gabriel" idade="1 ano, 5 meses" />
                     </HomeIsland>
 
